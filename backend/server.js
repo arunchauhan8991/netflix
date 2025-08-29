@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js"
 import cookieParser from "cookie-parser";
 import movieroutes from "./routes/movie.route.js";
 import tvroutes from "./routes/tv.route.js";
+import { protectRoute } from "./middleware/protectRoute.js";
 
 const app = express()
 app.use(cookieParser());
@@ -14,8 +15,8 @@ const PORT = ENV_VARS.PORT
 app.use(express.json())    // will allow us to parse req.body 
 
 app.use("/api/v1/auth", authroutes)
-app.use("/api/v1/movie", movieroutes)
-app.use("/api/v1/tv", tvroutes)
+app.use("/api/v1/movie", protectRoute, movieroutes)
+app.use("/api/v1/tv", protectRoute, tvroutes)
 
 
 
