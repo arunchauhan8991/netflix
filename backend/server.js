@@ -2,8 +2,10 @@ import { ENV_VARS } from "./config/envVariables.js"
 import express from "express"
 import authroutes from "./routes/auth.route.js"
 import { connectDB } from "./config/db.js"
+import cookieParser from "cookie-parser";
 
 const app = express()
+app.use(cookieParser());
 
 const PORT = ENV_VARS.PORT
 
